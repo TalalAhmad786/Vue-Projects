@@ -1,25 +1,35 @@
 <template>
   <div class="hello">
     <h1>{{ message }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-   
+    <input type="text" v-model="todoInpot">
+    <input type="button" value="Input Todo" @click="enterTodo">
+    <childComponent :todos="todo"/>
   </div>
 </template>
 
 <script>
+import childComponent from '@/components/childComponent.vue';
+
+
 export default {
   name: 'HelloWorld',
+  components: {
+    childComponent,
+  },
   props: {
-    msg: String
+    msg: String ,
   },
   data(){
     return{
-      message: 'Hello World! You have successfully Login'
+      message: 'Hello World! You have successfully Login',
+      todo: [],
+      todoInpot: '',
+    }
+  },
+  methods: {
+    enterTodo(){
+      this.todo.push(this.todoInpot);
+      console.log(this.todo);
     }
   }
 }

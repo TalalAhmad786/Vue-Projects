@@ -3,9 +3,14 @@
         <h1>"Welcome to Your Vue.js App"</h1>
 
 
-        <form @submit.prevent="submit"></form>
+
+        <form @submit.prevent="submit">
         <label for="Usname">Username :  </label>
-        <input type="text" v-model="form.username" ref="userref"><br>
+        <input type="text" v-model="form.username" ><br>
+        <!-- <input type="button" value="Submit" @click="submit">
+        
+        <ChildComponent :todos="todo"/> -->
+        
         <label for="password">Password : </label>
         <input type="text" v-model="form.password" ref="passref"><br>
         <label for="confirmpass">Confirm Password :  </label>
@@ -13,9 +18,9 @@
         <label for="email">Email :  </label>
         <input type="text" v-model="form.email"><br><br>
         <input type="button" value="Submit" @click="submit(form.username, form.password, form.email)">
-        <p v-if="error" style="color : red;">{{ error }}</p>
+        <p v-if="error" style="color : red;">{{ error }}</p> 
 
-     
+    </form> 
 
     </div>
 </template>
@@ -23,9 +28,16 @@
 
 <script>
 
+//import ChildComponent from '@/components/childComponent.vue';
+
 export default {
+
+    
     name: 'SignupPage',
- 
+    // components: {
+    //     ChildComponent
+    // },
+
     data() {
         return {
             error: '',
@@ -34,10 +46,23 @@ export default {
                 email: '',
                 password: '',
                 confirm: ''
-            }
+            },
+            todo : [],
         }
     },
     methods: {
+
+        // submit(){
+
+        
+        //     this.todo.push(this.form.username);
+        //     console.log(this.todo);
+            
+        
+        // }
+
+
+
 
         submit(username, password, email) {
             if ((this.isUserValid(username)) && (this.isPassValid(password)) && (this.isValidEmail(email)) && (this.isPassConfirm)) {
