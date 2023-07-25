@@ -17,7 +17,7 @@
         <input type="text" v-model="form.confirm"><br>
         <label for="email">Email :  </label>
         <input type="text" v-model="form.email"><br><br>
-        <input type="button" value="Submit" @click="submit(form.username, form.password, form.email)">
+        <input type="button" value="Submit" @click="submit(form.username, form.password,form.confirm, form.email)">
         <p v-if="error" style="color : red;">{{ error }}</p> 
 
     </form> 
@@ -64,8 +64,8 @@ export default {
 
 
 
-        submit(username, password, email) {
-            if ((this.isUserValid(username)) && (this.isPassValid(password)) && (this.isValidEmail(email)) && (this.isPassConfirm)) {
+        submit(username, password,confirm, email) {
+            if ((this.isUserValid(username)) && (this.isPassValid(password)) && (this.isValidEmail(email)) && (this.isPassConfirm(confirm))) {
             localStorage.setItem('username', username);
             localStorage.setItem('password', password);
                 this.$router.push({ path: "/login" });
@@ -144,11 +144,11 @@ export default {
                 return true;
             }
         },
-        isPassConfirm(){
+        isPassConfirm(p1){
           
-           const p1= this.form.password;
-           const p2 = this.form.confirm;
-                
+         const p2= this.form.password;
+            // console.log(p1);
+            // console.log(p2);
            if(p1===p2){
             return true;
 
